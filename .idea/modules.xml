@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CatTouristique.iml" filepath="$PROJECT_DIR$/CatTouristique.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-query-full.0.26.7/android-query-full.0.26.7.iml" filepath="$PROJECT_DIR$/android-query-full.0.26.7/android-query-full.0.26.7.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
