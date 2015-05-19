@@ -4,35 +4,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/detailnameetablissement"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="name"/>
-
-
-    <TextView
-        android:id="@+id/detailtypeetablissement"
-        android:layout_below="@+id/detailnameetablissement"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="type"/>
-
+    <ImageView
+        android:id="@+id/detailPicture"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@android:drawable/star_big_on" />
 
     <TextView
-        android:id="@+id/detailadresseetablissement"
-        android:layout_below="@+id/detailtypeetablissement"
+        android:id="@+id/detailNamEtablissement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="adresse"/>
+        android:text="name"
+        android:layout_toRightOf="@+id/detailPicture"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/detailTypEtablissement"
+        android:layout_below="@+id/detailNamEtablissement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="type"
+        android:layout_toRightOf="@+id/detailPicture"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
 
 
     <TextView
-        android:id="@+id/detailphoneetablissement"
-        android:layout_below="@+id/detailadresseetablissement"
+        android:id="@+id/detailAdressEtablissement"
+        android:layout_below="@+id/detailTypEtablissement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="phone"/>
+        android:text="adresse"
+        android:layout_toRightOf="@+id/detailPicture"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
+
+
+    <TextView
+        android:id="@+id/detailPhonEtablissement"
+        android:layout_below="@+id/detailAdressEtablissement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="phone"
+        android:layout_toRightOf="@+id/detailPicture"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <WebView
+        android:id="@+id/webViewMap"
+        android:layout_below="@+id/detailPicture"
+        android:layout_marginTop="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </WebView>
 
 
 </RelativeLayout>

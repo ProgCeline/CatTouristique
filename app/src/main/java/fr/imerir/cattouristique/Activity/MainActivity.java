@@ -1,4 +1,4 @@
-package fr.imerir.cattouristique;
+package fr.imerir.cattouristique.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -8,19 +8,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.androidquery.AQuery;
-import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.util.ArrayList;
+
+import fr.imerir.cattouristique.Models.Etablissement;
+import fr.imerir.cattouristique.Models.EtablissementsAdapter;
+import fr.imerir.cattouristique.R;
+
 
 
 public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
@@ -36,7 +38,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
         aQueryObject = new AQuery(this);
-        listEtablissements = new ArrayList<Etablissement>();
+        listEtablissements = new ArrayList<>();
         listViewEtablissements = (ListView) findViewById(R.id.elementsListView);
         listViewEtablissements.setOnItemClickListener(this);
     }
@@ -78,15 +80,20 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 try {
+
                     String nameJSON = jsonArray.getJSONObject(i).getString("name");
                     String adresseJSON = jsonArray.getJSONObject(i).getString("adresse");
                     String typeJSON = jsonArray.getJSONObject(i).getString("type");
+                    String phoneJSON = jsonArray.getJSONObject(i).getString("phone");
                     String photoJSON = jsonArray.getJSONObject(i).getString("photo");
                     double latitudeJSON = jsonArray.getJSONObject(i).getDouble("lat");
                     double longitudeJSON = jsonArray.getJSONObject(i).getDouble("lon");
+                    long idJSON = jsonArray.getJSONObject(i).getLong("id");
 
-                    listEtablissements.add(new Etablissement(nameJSON, typeJSON, adresseJSON, photoJSON, latitudeJSON, longitudeJSON));
+
+                    listEtablissements.add(new Etablissement(nameJSON, typeJSON, adresseJSON ,phoneJSON, photoJSON, latitudeJSON, longitudeJSON, idJSON));
                     Log.i("OBJET ETABLISSEMENT: ", "" + listEtablissements.get(i));
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -107,8 +114,10 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Intent goToDetail = new Intent(this, DetailActivity.class);
+        goToDetail.putExtra("etablissements", listEtablissements.get(position));
+
         startActivity(goToDetail);
     }
 }
