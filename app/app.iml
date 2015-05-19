@@ -88,9 +88,13 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="appcompat-v7-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.0.0" level="project" />
+<<<<<<< HEAD
     <orderEntry type="library" exported="" name="appcompat-v7-22.0.0" level="project" />
+=======
+>>>>>>> a5468cc74c6a430780e5764556d4d424b607e7e7
     <orderEntry type="module" module-name="android-query-full.0.26.7" exported="" />
   </component>
 </module>

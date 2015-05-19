@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
         aQueryObject = new AQuery(this);
-        listEtablissements = new ArrayList<>();
+        listEtablissements = new ArrayList<Etablissement>();
         listView = (ListView) findViewById(R.id.elementsListView);
         listView.setOnItemClickListener(this);
 

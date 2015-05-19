@@ -1,0 +1,104 @@
+{
+  "etablissements": [
+    {
+      "name": "Hotel l'Express",
+      "type": "Hotel",
+      "adresse":"3 Avenue du General de Gaulle 66300 Perpignan",
+      "tel": "",
+      "photo" : "",
+      "lat" : "42.696596",
+      "lon" : "2.880641"
+    },
+
+    {
+      "name": "Appart'City Perpignan",
+      "type": "Hotel",
+      "adresse":"12 Boulevard Saint Assiscle 66300 Perpignan",
+      "tel": "",
+      "photo" : "",
+      "lat" : "42.695658",
+      "lon" : "2.87815"
+    },
+
+    {
+      "name": "Hotel Aragon",
+      "type": "Hotel",
+      "adresse":"17 Avenue Gilbert Brutus 66000 Perpignan",
+      "tel": "",
+      "photo" : "",
+      "lat" : "42.6938483",
+      "lon" : "2.8891363"
+    },
+
+    {
+      "name": "Chez les Copains",
+      "type": "Bistrot",
+      "adresse":"4 Bis Rue de l'Amiral Berrera 66000 Perpignan",
+      "tel": "",
+      "photo" : "",
+      "lat" : "42.6991",
+      "lon" : "2.896711"
+    },
+
+    {
+      "name": "O'shannon Pub",
+      "type": "Bars",
+      "adresse":"3 rue de l'Incendie 66000 Perpignan",
+      "tel": "",
+      "photo" : "",
+      "lat" : "42.7002683",
+      "lon" : "2.8951434"
+    },
+
+    {
+      "name": "Le frère Mossé",
+      "type": "Restaurant",
+      "adresse":"14 rue de la Fusterie 66000 Perpignan",
+      "tel": "",
+      "photo" : "",
+      "lat" : "42.697813",
+      "lon" : "2.8950846"
+    },
+
+    {
+      "name": "Pizza Napoli",
+      "type": "Restaurant",
+      "adresse":"3 bis Place de Catalogne 66000 Perpignan",
+      "tel": "",
+      "photo" : "",
+      "lat" : "42.6986761",
+      "lon" : "2.8873897"
+    },
+
+    {
+      "name": "A Côté du Ben Aqui",
+      "type": "Bars à Tapas",
+      "adresse":"33 Avenue du General Leclerc 66000 Perpignan",
+      "tel": "",
+      "photo" : "",
+      "lat" : "42.701166",
+      "lon" : "2.890335"
+    },
+
+    {
+      "name": "Le Gecko",
+      "type": "Restaurant",
+      "adresse":"Mas de La Massotte 66300 Camelas",
+      "tel": "",
+      "photo" : "",
+      "lat" : "42.653393",
+      "lon" : "2.707287"
+    },
+
+    {
+      "name": "Le Pain d'Eric",
+      "type": "Boulangerie",
+      "adresse":"La Ferrerie 66300 Camelas",
+      "tel": "",
+      "photo" : "",
+      "lat" : "42.657095",
+      "lon" : "2.709076"
+    }
+
+  ]
+}

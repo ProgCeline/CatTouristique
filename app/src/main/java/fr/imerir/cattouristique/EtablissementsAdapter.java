@@ -10,16 +10,16 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by rcdsm on 19/05/15.
+ * Created by rcdsm on 18/05/2015.
  */
-public class itemsAdapter {
+public class EtablissementsAdapter {
 
     Context context;
     ArrayList<Etablissement> listOfEtablissements;
     LayoutInflater inflater;
 
 
-    public itemsAdapter(Context _context, ArrayList<Etablissement> _listOfEtablissements) {
+    public EtablissementsAdapter(Context _context, ArrayList<Etablissement> _listOfEtablissements) {
         this.context = _context;
         this.listOfEtablissements = _listOfEtablissements;
 
@@ -37,11 +37,11 @@ public class itemsAdapter {
     }
 
     /**
-    @Override
-    public long getItemId(int position){
-        return listOfEtablissements.get(position).get
-        return notes.get(position).getId();
-    }
+     @Override
+     public long getItemId(int position){
+     return listOfEtablissements.get(position).get
+     return notes.get(position).getId();
+     }
      **/
 
     //@Override
