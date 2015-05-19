@@ -66,12 +66,13 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     /**
      * FONCTION GET DATA FROM JSON
      */
-    public void asyncJson(){
+    public void asyncJson() {
         String URL = "http://perso.imerir.com/cboyer/etablissements.json";
         aQueryObject.ajax(URL, JSONObject.class, this, "requestCallback");
     }
-    public void requestCallback(String url, JSONObject json, AjaxStatus status){
-        if(json != null){
+
+    public void requestCallback(String url, JSONObject json, AjaxStatus status) {
+        if (json != null) {
             //SUCCES DE LA REQUETE
             JSONArray jsonArray = json.optJSONArray("etablissements");
 
@@ -90,7 +91,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                     e.printStackTrace();
                 }
             }
-        }else{
+        } else {
             //ECHEC DE LA REQUETE
             Log.i("ELEMENT RECUS: -", "RIEN RECU");
         }
@@ -110,5 +111,4 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         Intent goToDetail = new Intent(this, DetailActivity.class);
         startActivity(goToDetail);
     }
-
 }
