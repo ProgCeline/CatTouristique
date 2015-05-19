@@ -1,9 +1,11 @@
 package fr.imerir.cattouristique;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,21 +14,21 @@ import java.util.ArrayList;
 /**
  * Created by rcdsm on 18/05/2015.
  */
-public class EtablissementsAdapter {
+public class EtablissementsAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<Etablissement> listOfEtablissements;
     LayoutInflater inflater;
 
 
-    public EtablissementsAdapter(Context _context, ArrayList<Etablissement> _listOfEtablissements) {
-        this.context = _context;
-        this.listOfEtablissements = _listOfEtablissements;
+    public EtablissementsAdapter(Context context, ArrayList<Etablissement> listOfEtablissements) {
+        this.context = context;
+        this.listOfEtablissements = listOfEtablissements;
 
         inflater = LayoutInflater.from(context);
     }
 
-    //@Override
+    @Override
     public int getCount() {
         return listOfEtablissements.size();
     }
@@ -36,36 +38,37 @@ public class EtablissementsAdapter {
         return listOfEtablissements.get(position);
     }
 
-    /**
-     @Override
-     public long getItemId(int position){
-     return listOfEtablissements.get(position).get
-     return notes.get(position).getId();
-     }
-     **/
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-    //@Override
-    public View getNewView(int position, View convertView, ViewGroup parent){
+    @Override
+    public View getView(int position, View view, ViewGroup viewGroup) {
         NewView newView;
 
-        if(convertView == null){
-            convertView = inflater.inflate(R.layout.etablissement_item, null);
+        if(view == null){
+            view = inflater.inflate(R.layout.etablissement_item, null);
 
             newView = new NewView();
-            newView.etablissement_name = (TextView) convertView.findViewById(R.id.etablissementName);
-            newView.etablissement_type = (TextView) convertView.findViewById(R.id.etablissementType);
-            newView.etablissement_photo = (ImageView) convertView.findViewById(R.id.etablissementPicture);
-            convertView.setTag(newView);
+            newView.etablissement_name = (TextView) view.findViewById(R.id.etablissementName);
+            newView.etablissement_type = (TextView) view.findViewById(R.id.etablissementType);
+            newView.etablissement_photo = (ImageView) view.findViewById(R.id.etablissementPicture);
+            view.setTag(newView);
         }
         else{
-            newView = (NewView) convertView.getTag();
+            newView = (NewView) view.getTag();
         }
 
-        //holder.title.setText(notes.get(position).getTitle());
-        //holder.date.setText(format.format(notes.get(position).getCreatedAt()));
+        Uri lienURI = Uri.parse(listOfEtablissements.get(position).getPhoto_link().toString());
 
-        return convertView;
+        newView.etablissement_name.setText(listOfEtablissements.get(position).getName().toString());
+        newView.etablissement_type.setText(listOfEtablissements.get(position).getType().toString());
+        newView.etablissement_photo.setImageURI(lienURI);
+
+        return view;
     }
+
     class NewView {
         public ImageView etablissement_photo;
         public TextView etablissement_name;

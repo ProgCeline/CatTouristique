@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.androidquery.AQuery;
@@ -26,8 +27,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
     AQuery aQueryObject;
     ArrayList<Etablissement> listEtablissements;
-    ListView listView;
-    //EtablissementsAdapter etablissementsAdapter;
+    ListView listViewEtablissements;
 
 
     @Override
@@ -37,10 +37,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
         aQueryObject = new AQuery(this);
         listEtablissements = new ArrayList<Etablissement>();
-        listView = (ListView) findViewById(R.id.elementsListView);
-        listView.setOnItemClickListener(this);
-
-        //etablissementsAdapter = new EtablissementsAdapter;
+        listViewEtablissements = (ListView) findViewById(R.id.elementsListView);
+        listViewEtablissements.setOnItemClickListener(this);
     }
 
     @Override
@@ -66,15 +64,15 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     }
 
     /**
-     * FONCTION GET DATA FROM JSON: METHODE 1
+     * FONCTION GET DATA FROM JSON
      */
     public void asyncJson(){
-        String url = "http://perso.imerir.com/cboyer/etablissements.json";
-        aQueryObject.ajax(url, JSONObject.class, this, "jsonCallback");
+        String URL = "http://perso.imerir.com/cboyer/etablissements.json";
+        aQueryObject.ajax(URL, JSONObject.class, this, "requestCallback");
     }
-    public void jsonCallback(String url, JSONObject json, AjaxStatus status){
+    public void requestCallback(String url, JSONObject json, AjaxStatus status){
         if(json != null){
-            //successful ajax call
+            //SUCCES DE LA REQUETE
             JSONArray jsonArray = json.optJSONArray("etablissements");
 
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -83,72 +81,28 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                     String adresseJSON = jsonArray.getJSONObject(i).getString("adresse");
                     String typeJSON = jsonArray.getJSONObject(i).getString("type");
                     String photoJSON = jsonArray.getJSONObject(i).getString("photo");
-
                     double latitudeJSON = jsonArray.getJSONObject(i).getDouble("lat");
                     double longitudeJSON = jsonArray.getJSONObject(i).getDouble("lon");
 
-                    //etablissement = new Etablissement(nameJSON, typeJSON, adresseJSON, photoJSON, latitudeJSON, longitudeJSON);
-
-                    //listEtablissements.add(i, etablissement);
                     listEtablissements.add(new Etablissement(nameJSON, typeJSON, adresseJSON, photoJSON, latitudeJSON, longitudeJSON));
-
-                    //Log.i("OBJET ETABLISSEMENT: ", "" + etablissement);
                     Log.i("OBJET ETABLISSEMENT: ", "" + listEtablissements.get(i));
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         }else{
-            //ajax error
-            Log.i("ELEMENT RECUS -", "RIEN RECU");
+            //ECHEC DE LA REQUETE
+            Log.i("ELEMENT RECUS: -", "RIEN RECU");
         }
-    }
 
-    /**
-     * FONCTION GET DATA FROM JSON: METHODE 2
-     */
-    public void getDataFromJSON() {
-        String url = "http://perso.imerir.com/cboyer/etablissements.json";
-
-        aQueryObject.ajax(url, JSONObject.class, new AjaxCallback<JSONObject>() {
-
-            @Override
-            public void callback(String url, JSONObject json, AjaxStatus status) {
-                if (json != null) {
-                    JSONArray jsonArray = json.optJSONArray("etablissements");
-                    String name = "";
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        try {
-                            String nameJSON = jsonArray.getJSONObject(i).getString("name");
-                            String adresseJSON = jsonArray.getJSONObject(i).getString("adresse");
-                            String typeJSON = jsonArray.getJSONObject(i).getString("type");
-                            String photoJSON = jsonArray.getJSONObject(i).getString("photo");
-
-                            double latitudeJSON = jsonArray.getJSONObject(i).getDouble("lat");
-                            double longitudeJSON = jsonArray.getJSONObject(i).getDouble("lon");
-
-                            //etablissement = new Etablissement(nameJSON, typeJSON, adresseJSON, photoJSON, latitudeJSON, longitudeJSON);
-                            //listEtablissements.add(etablissement);
-
-                            listEtablissements.get(i).toString();
-                            //Log.i("OBJET ETABLISSEMENT: ", "" + etablissement);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } else
-                    Log.i("ELEMENT RECUS -", "RIEN RECU");
-            }
-        });
+        EtablissementsAdapter etablissementsAdapter = new EtablissementsAdapter(this, listEtablissements);
+        listViewEtablissements.setAdapter(etablissementsAdapter);
     }
 
     public void onResume() {
         super.onResume();
 
         asyncJson();
-
     }
 
     @Override
@@ -157,16 +111,4 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         startActivity(goToDetail);
     }
 
-    /**
-    public void onResume() {
-        super.onResume();
-
-        noteManager.listNotes();
-        realm = Realm.getInstance(this);
-        notes = realm.where(Note.class).findAll();
-
-        NoteAdapter adapter = new NoteAdapter(this, notes);
-        noteList.setAdapter(adapter);
-    }
-     **/
 }
