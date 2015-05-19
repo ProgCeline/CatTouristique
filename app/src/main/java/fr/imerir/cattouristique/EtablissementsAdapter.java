@@ -60,11 +60,11 @@ public class EtablissementsAdapter extends BaseAdapter {
             newView = (NewView) view.getTag();
         }
 
-        Uri lienURI = Uri.parse(listOfEtablissements.get(position).getPhoto_link().toString());
+        //Uri lienURI = Uri.parse(listOfEtablissements.get(position).getPhoto_link().toString());
 
         newView.etablissement_name.setText(listOfEtablissements.get(position).getName().toString());
         newView.etablissement_type.setText(listOfEtablissements.get(position).getType().toString());
-        newView.etablissement_photo.setImageURI(lienURI);
+        //newView.etablissement_photo.setImageURI(lienURI);
 
         return view;
     }
