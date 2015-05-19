@@ -9,10 +9,10 @@ public class Etablissement {
     public  String adresse;
     public  String photo_link;
 
-    public  float latitude;
-    public  float longitude;
+    public  double latitude;
+    public  double longitude;
 
-    public Etablissement(String _name, String _type, String _adresse, String _photo_link, float _latitude, float _longitude) {
+    public Etablissement(String _name, String _type, String _adresse, String _photo_link, double _latitude, double _longitude) {
         this.name = _name;
         this.type = _type;
         this.adresse = _adresse;
@@ -62,19 +62,19 @@ public class Etablissement {
         this.photo_link = photo_link;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 

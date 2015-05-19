@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp">
+
+
+    <ImageView
+        android:id="@+id/etablissementPicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:src="@android:drawable/btn_star_big_on" />
+
+    <TextView
+        android:id="@+id/etablissementName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/etablissementPicture"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:text="NOM ETABLISSEMENT" />
+
+    <TextView
+        android:id="@+id/etablissementAdress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etablissementName"
+        android:layout_toRightOf="@+id/etablissementPicture"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true"
+        android:text="ADRESSE ETABLISSEMENT"
+        />
+
+    <TextView
+        android:id="@+id/etablissementType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etablissementAdress"
+        android:layout_toRightOf="@+id/etablissementPicture"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true"
+        android:text="TYPE ETABLISSEMENT"
+        />
+
+</RelativeLayout>
