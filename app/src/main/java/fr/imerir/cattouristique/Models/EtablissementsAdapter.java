@@ -1,7 +1,6 @@
-package fr.imerir.cattouristique;
+package fr.imerir.cattouristique.Models;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import fr.imerir.cattouristique.R;
 
 /**
  * Created by rcdsm on 18/05/2015.
@@ -60,11 +61,11 @@ public class EtablissementsAdapter extends BaseAdapter {
             newView = (NewView) view.getTag();
         }
 
-        Uri lienURI = Uri.parse(listOfEtablissements.get(position).getPhoto_link().toString());
+        //Uri lienURI = Uri.parse(listOfEtablissements.get(position).getPhoto_link().toString());
 
         newView.etablissement_name.setText(listOfEtablissements.get(position).getName().toString());
         newView.etablissement_type.setText(listOfEtablissements.get(position).getType().toString());
-        newView.etablissement_photo.setImageURI(lienURI);
+        //newView.etablissement_photo.setImageURI(lienURI);
 
         return view;
     }
