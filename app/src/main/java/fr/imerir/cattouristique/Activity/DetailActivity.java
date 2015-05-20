@@ -1,5 +1,8 @@
 package fr.imerir.cattouristique.Activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -49,12 +53,18 @@ public class DetailActivity extends ActionBarActivity {
 
 
 
+
         etablissement = (Etablissement) getIntent().getSerializableExtra("etablissements");
 
         detailNameEtablissement.setText(etablissement.getName());
         detailTypeEtablissement.setText(etablissement.getType());
         detailAdressEtablissement.setText(etablissement.getAdresse());
         detailPhonEtablissement.setText(etablissement.getPhone());
+
+
+        if(etablissement.getPhoto_link()!=null && etablissement.getPhoto_link().length()>0) {
+            aQueryObject.id(imageViewPicture).image(etablissement.getPhoto_link());
+        }
 
 
     }
@@ -88,4 +98,7 @@ public class DetailActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
 }
+

@@ -1,12 +1,15 @@
 package fr.imerir.cattouristique.Models;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.androidquery.AQuery;
 
 import java.util.ArrayList;
 
@@ -20,11 +23,13 @@ public class EtablissementsAdapter extends BaseAdapter {
     Context context;
     ArrayList<Etablissement> listOfEtablissements;
     LayoutInflater inflater;
+    AQuery aQueryObject;
 
 
     public EtablissementsAdapter(Context context, ArrayList<Etablissement> listOfEtablissements) {
         this.context = context;
         this.listOfEtablissements = listOfEtablissements;
+        this.aQueryObject = new AQuery(context);
 
         inflater = LayoutInflater.from(context);
     }
@@ -61,11 +66,14 @@ public class EtablissementsAdapter extends BaseAdapter {
             newView = (NewView) view.getTag();
         }
 
-        //Uri lienURI = Uri.parse(listOfEtablissements.get(position).getPhoto_link().toString());
+
 
         newView.etablissement_name.setText(listOfEtablissements.get(position).getName().toString());
         newView.etablissement_type.setText(listOfEtablissements.get(position).getType().toString());
-        //newView.etablissement_photo.setImageURI(lienURI);
+        if(listOfEtablissements.get(position).getPhoto_link() != null && listOfEtablissements.get(position).getPhoto_link().length()>0) {
+            aQueryObject.id(newView.etablissement_photo).image(listOfEtablissements.get(position).getPhoto_link());
+        }
+
 
         return view;
     }
