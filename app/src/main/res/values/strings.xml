@@ -3,6 +3,23 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_grid">GridActivity</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <!-- -->
+
+    <!-- navigation drawer item labels  -->
+    <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_activity_grid</item>
+        <item>@string/nav_item_activity_detail</item>
+    </string-array>
+
+    <string name="nav_item_activity_grid">GridActivity</string>
+    <string name="nav_item_activity_detail">DetailActivity</string>
+
+    <!-- -->
 </resources>

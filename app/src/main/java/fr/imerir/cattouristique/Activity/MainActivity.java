@@ -1,17 +1,24 @@
 package fr.imerir.cattouristique.Activity;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
+import android.widget.Toolbar;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
@@ -37,6 +44,11 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     RadioButton CB_Hotel, CB_Restaurant, CB_Bar;
     EditText search_bar;
     RadioGroup radioGroup;
+    Switch ToggleButton;
+
+    android.support.v7.widget.Toolbar toolB;
+
+    EtablissementsAdapter etablissementsAdapter;
 
 
     @Override
@@ -52,12 +64,44 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         listViewEtablissements = (ListView) findViewById(R.id.elementsListView);
         listViewEtablissements.setOnItemClickListener(this);
 
+        etablissementsAdapter = new EtablissementsAdapter(this, listEtablissementsBar);
+
         radioGroup = (RadioGroup) findViewById(R.id.RadioGroup);
         CB_Hotel = (RadioButton) findViewById(R.id.CB_HOTEL);
         CB_Restaurant = (RadioButton) findViewById(R.id.CB_RESTAURANT);
         CB_Bar = (RadioButton) findViewById(R.id.CB_BAR);
 
+        ToggleButton = (Switch) findViewById(R.id.ToggleButton);
+
+        toolB = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolB);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         search_bar = (EditText) findViewById(R.id.search_bar);
+        search_bar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.i("TEXT CHANGE ", "text change");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                Log.i("TEXT a CHANGE ", "text a change");
+                asyncJsonSearch();
+            }
+        });
+
+        ToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+            }
+        });
     }
 
     @Override
@@ -85,6 +129,11 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     public void asyncJson() {
         String URL = "http://perso.imerir.com/cboyer/etablissements.json";
         aQueryObject.ajax(URL, JSONObject.class, this, "requestCallback");
+    }
+
+    public void asyncJsonSearch() {
+        String URL = "http://perso.imerir.com/cboyer/etablissements.json";
+        aQueryObject.ajax(URL, JSONObject.class, this, "searchEtablissement");
     }
 
     public void asyncJsonBar() {
@@ -261,10 +310,51 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         listViewEtablissements.setAdapter(etablissementsAdapter);
     }
 
+    public void searchEtablissement(String url, JSONObject json, AjaxStatus status) {
+        if (listEtablissements.size() > 0)
+            listEtablissements.clear();
+        if (json != null) {
+            //SUCCES DE LA REQUETE
+            Log.i("JSON REMPLI: ", "JSON REMPLI");
+            JSONArray jsonArray = json.optJSONArray("etablissements");
+
+            Log.i("RESULT ETABLISS: ", "RESULT ETABLISS "+jsonArray);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                try {
+                    String nameJSON = jsonArray.getJSONObject(i).getString("name");
+                    //if (search_bar.getText().)
+                    if (search_bar.getText().equals(nameJSON)){
+                        Log.i("SEARCH BAR GOOD: ", "SEARCH BAR GOOD");
+                        long idJSON = jsonArray.getJSONObject(i).getLong("id");
+                        String typeJSON = jsonArray.getJSONObject(i).getString("type");
+                        String adresseJSON = jsonArray.getJSONObject(i).getString("adresse");
+                        String phoneJSON = jsonArray.getJSONObject(i).getString("phone");
+                        String photoJSON = jsonArray.getJSONObject(i).getString("photo");
+                        double latitudeJSON = jsonArray.getJSONObject(i).getDouble("lat");
+                        double longitudeJSON = jsonArray.getJSONObject(i).getDouble("lon");
+
+                        Etablissement newEtablissement =  new Etablissement(nameJSON, typeJSON, adresseJSON ,phoneJSON, photoJSON, latitudeJSON, longitudeJSON, idJSON);
+                        listEtablissements.add(newEtablissement);
+                    }else
+                        Log.i("SEARCH BAR PAS GOOD ", "SEARCH BAR PAS GOOD");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            //ECHEC DE LA REQUETE
+            Log.i("ELEMENT RECUS: -", "RIEN RECU");
+        }
+
+        listViewEtablissements.setAdapter(etablissementsAdapter);
+    }
+
     public void onResume() {
         super.onResume();
 
         asyncJson();
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedID) {
@@ -287,4 +377,5 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
         startActivity(goToDetail);
     }
+
 }
