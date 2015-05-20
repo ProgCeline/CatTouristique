@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by rcdsm on 18/05/15.
  */
-public class Etablissement implements Serializable /**extends RealmObject**/{
+public class Etablissement implements Serializable{
     public long id;
     public  String name;
     public  String type;
@@ -17,7 +17,7 @@ public class Etablissement implements Serializable /**extends RealmObject**/{
     public  double longitude;
 
 
-    public Etablissement(String _name, String _type, String _adresse, String _phone, String _photo_link, double _latitude, double _longitude, long _id) {
+    public Etablissement(String _name, String _type, String _adresse, String _phone, String _photo_link, double _latitude, double _longitude, long _id ) {
         this.name = _name;
         this.type = _type;
         this.adresse = _adresse;
@@ -26,6 +26,7 @@ public class Etablissement implements Serializable /**extends RealmObject**/{
         this.latitude = _latitude;
         this.longitude = _longitude;
         this.id = _id;
+
     }
 
 

@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 import fr.imerir.cattouristique.Models.Etablissement;
 import fr.imerir.cattouristique.Models.EtablissementsAdapter;

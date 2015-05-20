@@ -1,40 +1,30 @@
 package fr.imerir.cattouristique.Activity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
+
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
-import com.androidquery.callback.AjaxStatus;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Locale;
 
 import fr.imerir.cattouristique.Models.Etablissement;
-import fr.imerir.cattouristique.Models.EtablissementsAdapter;
 import fr.imerir.cattouristique.R;
 
 
-public class DetailActivity extends ActionBarActivity {
+public class DetailActivity extends ActionBarActivity implements View.OnClickListener{
 
     AQuery aQueryObject;
     Etablissement etablissement;
     TextView detailNameEtablissement, detailAdressEtablissement, detailTypeEtablissement, detailPhonEtablissement;
     WebView webViewMap;
+    Button detailBtnPicture;
     ImageView imageViewPicture;
 
     @Override
@@ -48,8 +38,11 @@ public class DetailActivity extends ActionBarActivity {
         detailTypeEtablissement = (TextView) findViewById(R.id.detailTypEtablissement);
         detailPhonEtablissement = (TextView) findViewById(R.id.detailPhonEtablissement);
         detailNameEtablissement = (TextView) findViewById(R.id.detailNamEtablissement);
+
+
         webViewMap = (WebView) findViewById(R.id.webViewMap);
         imageViewPicture = (ImageView) findViewById(R.id.detailPicture);
+        detailBtnPicture = (Button) findViewById(R.id.detailBtnPicture);
 
 
 
@@ -65,6 +58,9 @@ public class DetailActivity extends ActionBarActivity {
         if(etablissement.getPhoto_link()!=null && etablissement.getPhoto_link().length()>0) {
             aQueryObject.id(imageViewPicture).image(etablissement.getPhoto_link());
         }
+
+        detailBtnPicture.setOnClickListener(this);
+
 
 
     }
@@ -97,7 +93,11 @@ public class DetailActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void onClick(View v){
 
+        Intent goToDetail = new Intent(this, GridActivity.class);
+        startActivity(goToDetail);
+    }
 
 
 }

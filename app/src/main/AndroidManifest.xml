@@ -23,6 +23,10 @@
             android:name=".Activity.DetailActivity"
             android:label="@string/title_activity_detail" >
         </activity>
+        <activity
+            android:name=".Activity.GridActivity"
+            android:label="@string/title_activity_grid" >
+        </activity>
     </application>
 
 </manifest>
