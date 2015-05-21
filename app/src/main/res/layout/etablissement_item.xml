@@ -43,6 +43,18 @@
             android:layout_alignParentRight="true"
             android:text="TYPE ETABLISSEMENT" />
 
+        <ImageButton
+            android:id="@+id/favoriteEtat"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/etablissementType"
+            android:layout_toRightOf="@+id/etablissementPicture"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#ffff1129"
+            android:clickable="true"
+            android:onClick="onClick" />
+
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

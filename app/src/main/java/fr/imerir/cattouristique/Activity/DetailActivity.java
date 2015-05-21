@@ -2,6 +2,7 @@ package fr.imerir.cattouristique.Activity;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,10 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
+
+import java.util.ArrayList;
 
 import fr.imerir.cattouristique.Models.Etablissement;
 import fr.imerir.cattouristique.R;
@@ -26,6 +30,9 @@ public class DetailActivity extends ActionBarActivity implements View.OnClickLis
     WebView webViewMap;
     Button detailBtnPicture;
     ImageView imageViewPicture;
+    ImageButton favoriteEtat;
+
+    ArrayList<Etablissement> listFAV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +65,23 @@ public class DetailActivity extends ActionBarActivity implements View.OnClickLis
         }
 
         detailBtnPicture.setOnClickListener(this);
+
+        favoriteEtat = (ImageButton) findViewById(R.id.favoriteEtat);
+        listFAV = new ArrayList<>();
+
     }
 
     public void onResume() {
         super.onResume();
+
+        favoriteEtat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                favoriteEtat.setBackgroundColor(Color.YELLOW);
+
+                listFAV.add(etablissement);
+            }
+        });
 
     }
 

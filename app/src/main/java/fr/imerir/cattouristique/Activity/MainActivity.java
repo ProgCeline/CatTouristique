@@ -1,6 +1,9 @@
 package fr.imerir.cattouristique.Activity;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.ActionBarActivity;
@@ -19,6 +22,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
@@ -49,7 +53,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     private FragmentDrawer drawerFragment;
 
     EtablissementsAdapter etablissementsAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +108,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
             }
         });
+
+        displayView(0);
     }
 
     @Override
@@ -123,6 +128,11 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+
+        if (id == R.id.search_bar){
+            Toast.makeText(getApplicationContext(), "Search action is selected!", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -392,5 +402,36 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     @Override
     public void onDrawerItemSelected(View view, int position) {
 
+    }
+
+    private void displayView(int position) {
+        Fragment fragment = null;
+        String title = getString(R.string.app_name);
+        switch (position) {
+            case 0:
+                fragment = new FavoriteFragment();
+                title = getString(R.string.title_activity_favorite);
+                break;
+            case 1:
+                //fragment = new FriendsFragment();
+                //title = getString(R.string.title_friends);
+                break;
+            case 2:
+                //fragment = new MessagesFragment();
+                //title = getString(R.string.title_messages);
+                break;
+            default:
+                break;
+        }
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_body, fragment);
+            fragmentTransaction.commit();
+
+            // set the toolbar title
+            getSupportActionBar().setTitle(title);
+        }
     }
 }

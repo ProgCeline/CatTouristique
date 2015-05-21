@@ -27,6 +27,10 @@
             android:name=".Activity.GridActivity"
             android:label="@string/title_activity_grid" >
         </activity>
+        <activity
+            android:name=".Activity.FavoriteActivity"
+            android:label="@string/title_activity_favorite" >
+        </activity>
     </application>
 
 </manifest>
