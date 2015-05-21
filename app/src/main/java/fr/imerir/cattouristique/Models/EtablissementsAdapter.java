@@ -62,7 +62,7 @@ public class EtablissementsAdapter extends BaseAdapter {
             newView.etablissement_name = (TextView) view.findViewById(R.id.etablissementName);
             newView.etablissement_type = (TextView) view.findViewById(R.id.etablissementType);
             newView.etablissement_photo = (ImageView) view.findViewById(R.id.etablissementPicture);
-            newView.favoEtat = (ImageButton) view.findViewById(R.id.favoriteEtat);
+            //newView.favoEtat = (ImageButton) view.findViewById(R.id.favoriteEtat);
             view.setTag(newView);
         }
         else{
@@ -77,13 +77,6 @@ public class EtablissementsAdapter extends BaseAdapter {
             aQueryObject.id(newView.etablissement_photo).image(listOfEtablissements.get(position).getPhoto_link());
         }
 
-        newView.favoEtat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newView.favoEtat.setBackgroundColor(Color.YELLOW);
-                //listOfEtablissements.add(newVi);
-            }
-        });
 
 
         return view;
@@ -93,7 +86,7 @@ public class EtablissementsAdapter extends BaseAdapter {
         public ImageView etablissement_photo;
         public TextView etablissement_name;
         public TextView etablissement_type;
-        private ImageButton favoEtat;
+        //private ImageButton favoEtat;
     }
 
 }

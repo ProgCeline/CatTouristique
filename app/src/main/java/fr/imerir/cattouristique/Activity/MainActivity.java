@@ -109,7 +109,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
             }
         });
 
-        displayView(0);
+        //displayView(0);
     }
 
     @Override
@@ -387,6 +387,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Intent goToDetail = new Intent(this, DetailActivity.class);
 
+        goToDetail.putExtra("etablissements", listEtablissements.get(position));
+        /**
         if (view == CB_Bar)
             goToDetail.putExtra("etablissements", listEtablissementsBar.get(position));
         else if (view == CB_Hotel)
@@ -395,6 +397,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
             goToDetail.putExtra("etablissements", listEtablissementsResto.get(position));
         else
             goToDetail.putExtra("etablissements", listEtablissements.get(position));
+         **/
 
         startActivity(goToDetail);
     }

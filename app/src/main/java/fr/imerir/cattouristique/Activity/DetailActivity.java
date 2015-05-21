@@ -66,14 +66,15 @@ public class DetailActivity extends ActionBarActivity implements View.OnClickLis
 
         detailBtnPicture.setOnClickListener(this);
 
-        favoriteEtat = (ImageButton) findViewById(R.id.favoriteEtat);
-        listFAV = new ArrayList<>();
+        //favoriteEtat = (ImageButton) findViewById(R.id.favoriteEtat);
+        //listFAV = new ArrayList<>();
 
     }
 
     public void onResume() {
         super.onResume();
 
+        /**
         favoriteEtat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +83,7 @@ public class DetailActivity extends ActionBarActivity implements View.OnClickLis
                 listFAV.add(etablissement);
             }
         });
+         **/
 
     }
 

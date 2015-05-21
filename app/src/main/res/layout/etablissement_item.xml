@@ -43,6 +43,7 @@
             android:layout_alignParentRight="true"
             android:text="TYPE ETABLISSEMENT" />
 
+        <!--
         <ImageButton
             android:id="@+id/favoriteEtat"
             android:layout_width="30dp"
@@ -54,6 +55,7 @@
             android:background="#ffff1129"
             android:clickable="true"
             android:onClick="onClick" />
+            -->
 
     </RelativeLayout>
 
