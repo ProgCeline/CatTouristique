@@ -45,8 +45,6 @@ public class DetailActivity extends ActionBarActivity implements View.OnClickLis
         detailBtnPicture = (Button) findViewById(R.id.detailBtnPicture);
 
 
-
-
         etablissement = (Etablissement) getIntent().getSerializableExtra("etablissements");
 
         detailNameEtablissement.setText(etablissement.getName());
@@ -60,15 +58,10 @@ public class DetailActivity extends ActionBarActivity implements View.OnClickLis
         }
 
         detailBtnPicture.setOnClickListener(this);
-
-
-
     }
 
     public void onResume() {
         super.onResume();
-
-
 
     }
 
@@ -94,7 +87,6 @@ public class DetailActivity extends ActionBarActivity implements View.OnClickLis
         return super.onOptionsItemSelected(item);
     }
     public void onClick(View v){
-
         Intent goToDetail = new Intent(this, GridActivity.class);
         startActivity(goToDetail);
     }

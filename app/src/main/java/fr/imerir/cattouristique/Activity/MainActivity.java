@@ -1,7 +1,8 @@
 package fr.imerir.cattouristique.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
+import android.support.v4.widget.DrawerLayout;
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,12 +14,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.GridView;
+;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
-import android.widget.Toolbar;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
@@ -28,7 +28,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 
 import fr.imerir.cattouristique.Models.Etablissement;
 import fr.imerir.cattouristique.Models.EtablissementsAdapter;
@@ -36,7 +35,7 @@ import fr.imerir.cattouristique.R;
 
 
 
-public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener, FragmentDrawer.FragmentDrawerListener {
 
     AQuery aQueryObject;
     ArrayList<Etablissement> listEtablissements, listEtablissementsBar, listEtablissementsResto, listEtablissementsHotel;
@@ -46,7 +45,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     RadioGroup radioGroup;
     Switch ToggleButton;
 
-    android.support.v7.widget.Toolbar toolB;
+    android.support.v7.widget.Toolbar toolbar;
+    private FragmentDrawer drawerFragment;
 
     EtablissementsAdapter etablissementsAdapter;
 
@@ -61,22 +61,25 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         listEtablissementsBar = new ArrayList<>();
         listEtablissementsResto = new ArrayList<>();
         listEtablissementsHotel = new ArrayList<>();
-        listViewEtablissements = (ListView) findViewById(R.id.elementsListView);
-        listViewEtablissements.setOnItemClickListener(this);
-
         etablissementsAdapter = new EtablissementsAdapter(this, listEtablissementsBar);
 
+
+        listViewEtablissements = (ListView) findViewById(R.id.elementsListView);
         radioGroup = (RadioGroup) findViewById(R.id.RadioGroup);
         CB_Hotel = (RadioButton) findViewById(R.id.CB_HOTEL);
         CB_Restaurant = (RadioButton) findViewById(R.id.CB_RESTAURANT);
         CB_Bar = (RadioButton) findViewById(R.id.CB_BAR);
-
         ToggleButton = (Switch) findViewById(R.id.ToggleButton);
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
 
-        toolB = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
 
-        setSupportActionBar(toolB);
+        listViewEtablissements.setOnItemClickListener(this);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
+        drawerFragment.setDrawerListener(this);
 
 
         search_bar = (EditText) findViewById(R.id.search_bar);
@@ -373,9 +376,21 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Intent goToDetail = new Intent(this, DetailActivity.class);
-        goToDetail.putExtra("etablissements", listEtablissements.get(position));
+
+        if (view == CB_Bar)
+            goToDetail.putExtra("etablissements", listEtablissementsBar.get(position));
+        else if (view == CB_Hotel)
+            goToDetail.putExtra("etablissements", listEtablissementsHotel.get(position));
+        else if (view == CB_Restaurant)
+            goToDetail.putExtra("etablissements", listEtablissementsResto.get(position));
+        else
+            goToDetail.putExtra("etablissements", listEtablissements.get(position));
 
         startActivity(goToDetail);
     }
 
+    @Override
+    public void onDrawerItemSelected(View view, int position) {
+
+    }
 }
